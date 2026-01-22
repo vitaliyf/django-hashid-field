@@ -4,6 +4,9 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/) 
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [3.5.1] - 2025-01-22
+- Modernize testing to support only currently-supported Django versions (4.2, 5.2, 6.0) and their Python versions.
+
 ## [3.5.0] - 2025-01-21
 - Add support for Django 6.0
 

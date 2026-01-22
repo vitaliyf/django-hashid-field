@@ -3,14 +3,6 @@
 .. image:: https://badge.fury.io/py/django-hashid-field.svg
     :target: https://badge.fury.io/py/django-hashid-field
 
-WARNING! This module is retired!
-================================
-
-**This library has been retired. It is no longer recommended for new projects. Existing projects do not require**
-**changes, but should consider migrating to a different library. See the**
-`RETIRED <https://github.com/nshafer/django-hashid-field/blob/master/RETIRED.md>`_
-**document for more information.**
-
 Django Hashid Field
 ===================
 
@@ -43,12 +35,10 @@ Requirements
 
 This module is tested and known to work with:
 
-* Python 3.7, 3.8, 3.9, 3.10, 3.11, 3.12
-* Django 3.2, 4.2, 5.0
+* Python 3.10, 3.11, 3.12, 3.13, 3.14
+* Django 4.2, 5.0, 5.2, 6.0
 * Hashids 1.3
-* Django REST Framework 3.14
-
-*Please Note*: Python 2.x is at its end of life and is no longer supported.
+* Django REST Framework 3.15
 
 Installation
 ------------

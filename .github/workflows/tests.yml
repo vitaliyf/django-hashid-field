@@ -1,8 +1,10 @@
 name: Tests
 
 on:
-  push:
   pull_request:
+
+permissions:
+  contents: read
 
 jobs:
   test:
@@ -10,35 +12,49 @@ jobs:
       fail-fast: false
       matrix:
         python:
+          - "3.10"
+          - "3.11"
           - "3.12"
           - "3.13"
+          - "3.14"
         django:
-          - "4.2.9"
-          - "5.0.1"
-          - "5.1"
+          - "4.2"
           - "5.2"
           - "6.0"
         drf:
           - "no"
           - "3.15.1"
         exclude:
-          - python: "3.12"
-            django: "3.2.23"
+          - python: "3.13"
+            django: "4.2"
+          - python: "3.14"
+            django: "4.2"
+
+          - python: "3.10"
+            django: "6.0"
+          - python: "3.11"
+            django: "6.0"
 
     name: "Python ${{ matrix.python }} - Django ${{ matrix.django }} - DRF ${{ matrix.drf }}"
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - name: Set up Python
-        uses: actions/setup-python@v2
+      - uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v6
         with:
           python-version: ${{ matrix.python }}
       - name: Install Dependencies
+        env:
+          DJANGO_VERSION: ${{ matrix.django }}
         run: |
           pip install -r ci/requirements.txt
           pip install --upgrade "Django==${{ matrix.django }}"
-          if [[ "$DRF_VERSION" != "no" ]]; then pip install --upgrade djangorestframework==${DRF_VERSION}; fi
+      - name: Install django-rest-framework
+        if: matrix.drf != 'no'
         env:
           DRF_VERSION: ${{ matrix.drf }}
+        run: |
+          pip install --upgrade djangorestframework==${DRF_VERSION}
       - name: Run Tests
         run: python runtests.py
