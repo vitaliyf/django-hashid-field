@@ -4,6 +4,9 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/) 
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [3.5.0] - 2025-01-21
+- Add support for Django 6.0
+
 ## [3.4.1] - 2024-01-29
 ### Changes
 - Add `lookup_name` hints to Lookups for some third party tools, such as DRF Spectacular, django-filter, etc.
