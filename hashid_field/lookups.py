@@ -86,6 +86,13 @@ class HashidExactLookup(HashidFieldGetDbPrepValueMixin, Lookup):
     def as_sql(self, compiler, connection):
         lhs_sql, params = self.process_lhs(compiler, connection)
         rhs_sql, rhs_params = self.process_rhs(compiler, connection)
+
+        # Django 6.x
+        if isinstance(params, tuple):
+            params = list(params)
+        if isinstance(rhs_params, tuple):
+            rhs_params = list(rhs_params)
+
         params.extend(rhs_params)
         rhs_sql = self.get_rhs_op(connection, rhs_sql)
         return '%s %s' % (lhs_sql, rhs_sql), params
